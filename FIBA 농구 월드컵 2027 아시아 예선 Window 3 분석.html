@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/KOSPOLE/Downloads/index.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIBA 농구 월드컵 2027 아시아 예선 Window 3 분석</title>
+<link rel="stylesheet" href="./FIBA 농구 월드컵 2027 아시아 예선 Window 3 분석_files/tabler-icons.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f4f0;
+    --bg3: #eeece6;
+    --text1: #1a1a18;
+    --text2: #5a5a56;
+    --text3: #8a8a84;
+    --border1: rgba(0,0,0,0.12);
+    --border2: rgba(0,0,0,0.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg2: #252523;
+      --bg3: #2e2e2b;
+      --text1: #f0ede6;
+      --text2: #a0a09a;
+      --text3: #707068;
+      --border1: rgba(255,255,255,0.12);
+      --border2: rgba(255,255,255,0.07);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg3);
+    color: var(--text1);
+    min-height: 100vh;
+    padding: 20px 16px 60px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* 헤더 */
+  .hdr { margin-bottom: 20px; }
+  .hdr h1 { font-size: 20px; font-weight: 600; color: var(--text1); }
+  .hdr-sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+  .hdr-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .hbadge { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
+  .hb1 { background: #E6F1FB; color: #185FA5; }
+  .hb2 { background: #EAF3DE; color: #3B6D11; }
+  .hb3 { background: #FAEEDA; color: #854F0B; }
+
+  /* 경기 예측 */
+  .section-title { font-size: 13px; font-weight: 600; color: var(--text1); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .match-block { background: var(--bg); border: 0.5px solid var(--border1); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .match-group-label { font-size: 11px; font-weight: 600; color: var(--text2); margin: 10px 0 6px; padding-bottom: 4px; border-bottom: 0.5px solid var(--border2); }
+  .match-group-label:first-child { margin-top: 0; }
+  .match-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--border2); }
+  .match-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .mdate { font-size: 10px; color: var(--text3); min-width: 50px; flex-shrink: 0; }
+  .mteams { flex: 1; font-size: 12px; color: var(--text1); font-weight: 500; }
+  .mloc { font-size: 10px; color: var(--text3); min-width: 75px; text-align: right; flex-shrink: 0; }
+  .pred { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+  .p-str { background: #EAF3DE; color: #2d6a10; }
+  .p-mid { background: #FAEEDA; color: #7a4a0a; }
+  .p-close { background: #E6F1FB; color: #185FA5; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--text2); margin-bottom: 16px; }
+  .leg { display: flex; align-items: center; gap: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* 필터 */
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .fb { font-size: 11px; padding: 4px 12px; border: 0.5px solid var(--border1); border-radius: 20px; background: var(--bg); color: var(--text2); cursor: pointer; transition: all 0.15s; font-weight: 500; }
+  .fb:hover { background: var(--bg2); }
+  .fb.on { background: var(--text1); color: var(--bg); border-color: var(--text1); }
+
+  /* 팀 카드 */
+  .team-grid { display: flex; flex-direction: column; gap: 8px; }
+  .card { background: var(--bg); border: 0.5px solid var(--border1); border-radius: var(--radius); overflow: hidden; }
+  .chdr { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; cursor: pointer; user-select: none; transition: background 0.12s; }
+  .chdr:hover { background: var(--bg2); }
+  .ctitle { display: flex; align-items: center; gap: 10px; }
+  .cflag { font-size: 22px; line-height: 1; }
+  .cname { font-size: 14px; font-weight: 600; color: var(--text1); }
+  .cmeta { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .cright { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  .badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .b-final { background: #EAF3DE; color: #3B6D11; }
+  .b-prelim { background: #FAEEDA; color: #854F0B; }
+  .b-a { background: #E6F1FB; color: #185FA5; }
+  .b-b { background: #EEEDFE; color: #534AB7; }
+  .b-c { background: #E1F5EE; color: #0F6E56; }
+  .b-d { background: #FCEBEB; color: #A32D2D; }
+  .chev { font-size: 14px; color: var(--text3); transition: transform 0.2s; margin-left: 4px; }
+  .chev.open { transform: rotate(180deg); }
+
+  .cbody { display: none; border-top: 0.5px solid var(--border2); }
+  .cbody.open { display: block; }
+  .ccomment { padding: 11px 14px; background: var(--bg2); border-bottom: 0.5px solid var(--border2); font-size: 12px; color: var(--text2); line-height: 1.7; }
+  .ccomment strong { color: var(--text1); font-weight: 600; }
+  .cplayers { padding: 11px 14px; }
+  .slabel { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px; }
+  .slabel:not(:first-child) { margin-top: 10px; }
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 5px; }
+  .pc { background: var(--bg2); border: 0.5px solid var(--border2); border-radius: var(--radius-sm); padding: 8px 10px; }
+  .pc.st { border-left: 3px solid #185FA5; }
+  .pc.sb { border-left: 3px solid #3B6D11; }
+  .pn { font-size: 12px; font-weight: 600; color: var(--text1); }
+  .pt { font-size: 10px; color: var(--text3); margin-top: 1px; }
+  .ps { font-size: 10px; color: var(--text2); margin-top: 3px; line-height: 1.4; }
+  .ptags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+  .tag { font-size: 9px; padding: 1px 6px; border-radius: 3px; background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text3); }
+  .divider { width: 100%; height: 0.5px; background: var(--border2); margin: 8px 0; }
+
+  /* 반응형 */
+  @media (max-width: 600px) {
+    .hdr h1 { font-size: 16px; }
+    .pgrid { grid-template-columns: 1fr; }
+    .match-row { flex-wrap: wrap; gap: 4px; }
+    .mloc { min-width: auto; }
+  }
+
+  /* 푸터 */
+  .footer { text-align: center; font-size: 11px; color: var(--text3); margin-top: 40px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hdr">
+    <h1>🏀 FIBA 농구 월드컵 2027 아시아 예선 Window 3</h1>
+    <div class="hdr-sub">16개 팀 로스터 분석 · W3 일정 및 승리 예측 · 승률 예측 참고 자료</div>
+    <div class="hdr-badges">
+      <span class="hbadge hb1">2026년 6월 29일 ~ 7월 6일</span>
+      <span class="hbadge hb2">공식 로스터 기준</span>
+      <span class="hbadge hb3">W2 성적 반영</span>
+    </div>
+  </div>
+
+  <!-- W3 일정 & 승리 예측 -->
+  <div class="section-title"><i class="ti ti-calendar-event"></i> Window 3 전체 일정 및 승리 예측</div>
+  <div class="match-block">
+    <div class="match-group-label">그룹 C · D — 6/29(월) · 7/2(목) · 7/5(일)</div>
+    <div class="match-row"><span class="mdate">6/29 월</span><span class="mteams">🇮🇷 이란 vs 🇸🇾 시리아</span><span class="pred p-str">이란 강세</span><span class="mloc">암만(중립)</span></div>
+    <div class="match-row"><span class="mdate">6/29 월</span><span class="mteams">🇶🇦 카타르 vs 🇸🇦 사우디</span><span class="pred p-close">접전 · 사우디 미세 우위</span><span class="mloc">도하(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/2 목</span><span class="mteams">🇯🇴 요르단 vs 🇮🇷 이란</span><span class="pred p-mid">요르단 우위 · 이란 반격 변수</span><span class="mloc">암만(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/2 목</span><span class="mteams">🇸🇦 사우디 vs 🇱🇧 레바논</span><span class="pred p-mid">레바논 우위 · 원정 이점 상쇄</span><span class="mloc">제다(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/5 일</span><span class="mteams">🇸🇾 시리아 vs 🇮🇶 이라크</span><span class="pred p-close">시리아 우위 · 이라크 분전</span><span class="mloc">중립구장</span></div>
+    <div class="match-row"><span class="mdate">7/5 일</span><span class="mteams">🇮🇳 인도 vs 🇶🇦 카타르</span><span class="pred p-str">카타르 강세</span><span class="mloc">도하(홈)</span></div>
+
+    <div class="match-group-label">그룹 A · B — 7/3(금) · 7/6(월)</div>
+    <div class="match-row"><span class="mdate">7/3 금</span><span class="mteams">🇦🇺 호주 vs 🇬🇺 괌</span><span class="pred p-str">호주 압승 · Cotton 데뷔전</span><span class="mloc">퍼스(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/3 금</span><span class="mteams">🇳🇿 뉴질랜드 vs 🇵🇭 필리핀</span><span class="pred p-mid">뉴질랜드 우위 · 홈 이점</span><span class="mloc">오클랜드(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/3 금</span><span class="mteams">🇰🇷 한국 vs 🇹🇼 중화 타이베이</span><span class="pred p-mid">한국 홈 우위 · 설욕 동기 강함</span><span class="mloc">고양(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/3 금</span><span class="mteams">🇨🇳 중국 vs 🇯🇵 일본</span><span class="pred p-close">일본 우위 · 중국 홈 이점 변수</span><span class="mloc">선양(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/6 월</span><span class="mteams">🇵🇭 필리핀 vs 🇦🇺 호주</span><span class="pred p-str">호주 강세 · 전력차 명확</span><span class="mloc">마닐라</span></div>
+    <div class="match-row"><span class="mdate">7/6 월</span><span class="mteams">🇬🇺 괌 vs 🇳🇿 뉴질랜드</span><span class="pred p-str">뉴질랜드 강세</span><span class="mloc">괌</span></div>
+    <div class="match-row"><span class="mdate">7/6 월</span><span class="mteams">🇰🇷 한국 vs 🇯🇵 일본</span><span class="pred p-close">⭐ 박빙 · 한국 2라운드 분수령</span><span class="mloc">고양(홈)</span></div>
+    <div class="match-row"><span class="mdate">7/6 월</span><span class="mteams">🇨🇳 중국 vs 🇹🇼 중화 타이베이</span><span class="pred p-mid">중국 우위 · 대만 이변 가능</span><span class="mloc">고양(중립)</span></div>
+  </div>
+
+  <div class="legend">
+    <span class="leg"><span class="dot" style="background:#3B6D11"></span>강세 승리 (70%+)</span>
+    <span class="leg"><span class="dot" style="background:#854F0B"></span>우위 (60~70%)</span>
+    <span class="leg"><span class="dot" style="background:#185FA5"></span>박빙 (50~60%)</span>
+  </div>
+
+  <!-- 팀 필터 -->
+  <div class="filters">
+    <button class="fb on" onclick="filt(&#39;all&#39;,this)">전체 (16)</button>
+    <button class="fb" onclick="filt(&#39;A&#39;,this)">A조</button>
+    <button class="fb" onclick="filt(&#39;B&#39;,this)">B조</button>
+    <button class="fb" onclick="filt(&#39;C&#39;,this)">C조</button>
+    <button class="fb" onclick="filt(&#39;D&#39;,this)">D조</button>
+  </div>
+
+  <div class="team-grid" id="grid"><div class="card" data-group="A" id="card-aus">
+    <div class="chdr" onclick="tog(&#39;aus&#39;)">
+      <div class="ctitle"><span class="cflag">🇦🇺</span><div><div class="cname">호주 (Australia)</div><div class="cmeta">FIBA 6위 · 4승0패 → 1위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-final">최종 확정</span><span class="badge b-a">A조</span><i class="ti ti-chevron-down chev" id="chev-aus"></i></div>
+    </div>
+    <div class="cbody" id="body-aus">
+      <div class="ccomment"><strong>FIBA 세계 6위. 아시아 절대 강자. W3에서 Bryce Cotton 국가대표 데뷔 예정.</strong> Cotton(Adelaide 36ers, 25.9점 7.6어시 NBL 6회 MVP)은 3점슛·퀵릴리스·자유투 유도·플레이메이킹을 모두 갖춘 NBL 역대급 선수. Mitch Creek·Jack McVeigh(All-NBL 2nd Team) 양방향 윙진 균형. Alex Condon 내곽 픽앤롤·리바운드. Elijah Pepper·Taran Armstrong 뎁스 충분. W3 괌전(홈, Cotton 데뷔)·필리핀 원정 모두 우세.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Bryce Cotton</div><div class="pt">Adelaide 36ers (NBL)</div><div class="ps">25.9점 7.6어시 | NBL 6회 MVP | W3 국대 데뷔</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">3점슈터</span><span class="tag">플레이메이커</span><span class="tag">클러치</span><span class="tag">NBL아이콘</span></div></div><div class="pc st"><div class="pn">Mitch Creek</div><div class="pt">SE Melbourne Phoenix (NBL)</div><div class="ps">베테랑 SF | 양방향 플레이</div><div class="ptags"><span class="tag">올라운더</span><span class="tag">수비</span><span class="tag">리더십</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Jack McVeigh</div><div class="pt">Cairns Taipans (NBL)</div><div class="ps">All-NBL 2nd Team | 외곽 위협</div><div class="ptags"><span class="tag">3점슈터</span><span class="tag">윙수비</span><span class="tag">차세대핵심</span></div></div><div class="pc st"><div class="pn">Tyrese Proctor</div><div class="pt">Duke → 프로 준비</div><div class="ps">폭발적 돌파 가드 | 차세대</div><div class="ptags"><span class="tag">돌파</span><span class="tag">속공</span><span class="tag">창의적드리블</span><span class="tag">차세대</span></div></div><div class="pc st"><div class="pn">Alex Condon</div><div class="pt">Brisbane Bullets (NBL)</div><div class="ps">내곽 빅맨 | 픽앤롤·리바</div><div class="ptags"><span class="tag">센터</span><span class="tag">픽앤롤</span><span class="tag">리바운드</span><span class="tag">수비</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Ben Henshall</div><div class="pt">Perth Wildcats (NBL)</div><div class="ps">인사이드아웃 PF 식스맨</div><div class="ptags"><span class="tag">PF</span><span class="tag">픽앤롤</span><span class="tag">에너지</span></div></div><div class="pc sb"><div class="pn">Elijah Pepper</div><div class="pt">Wellington Saints (NZ NBL)</div><div class="ps">득점력 있는 식스맨</div><div class="ptags"><span class="tag">스코어러</span><span class="tag">윙</span></div></div><div class="pc sb"><div class="pn">Angus Glover</div><div class="pt">NBL</div><div class="ps">뎁스 가드</div><div class="ptags"><span class="tag">가드</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="A" id="card-nzl">
+    <div class="chdr" onclick="tog(&#39;nzl&#39;)">
+      <div class="ctitle"><span class="cflag">🇳🇿</span><div><div class="cname">뉴질랜드 (New Zealand)</div><div class="cmeta">FIBA 24위 · 2승2패 → 2위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-final">최종 확정</span><span class="badge b-a">A조</span><i class="ti ti-chevron-down chev" id="chev-nzl"></i></div>
+    </div>
+    <div class="cbody" id="body-nzl">
+      <div class="ccomment"><strong>FIBA 세계 24위. W3에서 Tai Webster·Shea Ili 복귀로 전력 최고조.</strong> Webster(NZ NBL 24.3점)는 장기 부상 복귀 에이스 가드(전 NBA). Shea Ili는 NBL 2회 수비왕으로 퍼리미터 수비 최고 수준. Tohi Smith-Milner(18.0점)가 공격 주도. Sam Timmins(리바운드 10.3, 블록 1.8) 내곽 장악. Taylor Britt(어시스트 7.3) 플레이메이킹. W3 홈 필리핀전·괌 원정 모두 우세.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Tai Webster</div><div class="pt">Manawatū Jets (NZ NBL)</div><div class="ps">24.3점 | W3 복귀 | 전 NBA</div><div class="ptags"><span class="tag">에이스</span><span class="tag">득점</span><span class="tag">돌파</span><span class="tag">리더십</span><span class="tag">W3복귀</span></div></div><div class="pc st"><div class="pn">Shea Ili</div><div class="pt">Melbourne United (NBL)</div><div class="ps">NBL 수비왕 2회 | 8.0어시 | W3 복귀</div><div class="ptags"><span class="tag">수비스페셜리스트</span><span class="tag">퍼리미터수비</span><span class="tag">어시스트</span><span class="tag">W3복귀</span></div></div><div class="pc st"><div class="pn">Tohi Smith-Milner</div><div class="pt">Brisbane Bullets (NBL)</div><div class="ps">18.0점 | 팀 최다득점 포워드</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">포워드</span><span class="tag">돌파</span><span class="tag">에너지</span></div></div><div class="pc st"><div class="pn">Sam Timmins</div><div class="pt">Southland Sharks (NZ NBL)</div><div class="ps">리바운드 10.3 블록 1.8 | 장신 C</div><div class="ptags"><span class="tag">센터</span><span class="tag">리바운드</span><span class="tag">림프로텍션</span><span class="tag">수비</span></div></div><div class="pc st"><div class="pn">Reuben Te Rangi</div><div class="pt">BNZ Breakers / Tauranga Whai</div><div class="ps">16.5점 | 올라운더 | 국가대표 경력 多</div><div class="ptags"><span class="tag">가드</span><span class="tag">다재다능</span><span class="tag">득점</span><span class="tag">국가대표다수</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Taylor Britt</div><div class="pt">Canterbury Rams (NZ NBL)</div><div class="ps">어시스트 7.3 | W3로 50캡 예정</div><div class="ptags"><span class="tag">플레이메이커</span><span class="tag">어시스트</span><span class="tag">베테랑</span></div></div><div class="pc sb"><div class="pn">Taine Murray</div><div class="pt">Brisbane Bullets (NBL)</div><div class="ps">3점 가드 | 차세대 핵심</div><div class="ptags"><span class="tag">3점슈터</span><span class="tag">젊은피</span><span class="tag">차세대</span></div></div><div class="pc sb"><div class="pn">Jordan Ngatai</div><div class="pt">Tauranga Whai</div><div class="ps">95캡 베테랑 윙</div><div class="ptags"><span class="tag">경험</span><span class="tag">윙수비</span><span class="tag">베테랑</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="A" id="card-phi">
+    <div class="chdr" onclick="tog(&#39;phi&#39;)">
+      <div class="ctitle"><span class="cflag">🇵🇭</span><div><div class="cname">필리핀 (Philippines)</div><div class="cmeta">FIBA 36위 · 2승2패 → 3위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-final">최종 확정</span><span class="badge b-a">A조</span><i class="ti ti-chevron-down chev" id="chev-phi"></i></div>
+    </div>
+    <div class="cbody" id="body-phi">
+      <div class="ccomment"><strong>FIBA 세계 36위. Justin Brownlee 중심의 귀화 의존 구조.</strong> Brownlee(16.5점 4.5어시)가 돌파·드리블·패스를 도맡는 사실상 원맨팀. Scottie Thompson은 수비·허슬로 보조. June Mar Fajardo(PBA 다회 MVP) 내곽 상징이지만 체력 관리 필요. Dwight Ramos 2차 득점원. RJ Abarrientos·Justine Baltazar가 새 활력. W3 뉴질랜드 원정은 어렵고, 홈 호주전도 전력차 크다.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Justin Brownlee</div><div class="pt">Barangay Ginebra (PBA)</div><div class="ps">16.5점 4.5어시 | 귀화 에이스</div><div class="ptags"><span class="tag">귀화</span><span class="tag">주 득점원</span><span class="tag">볼핸들러</span><span class="tag">돌파</span><span class="tag">창의적드리블</span></div></div><div class="pc st"><div class="pn">Scottie Thompson</div><div class="pt">Barangay Ginebra (PBA)</div><div class="ps">올라운더 SG | 수비·허슬</div><div class="ptags"><span class="tag">올라운더</span><span class="tag">수비</span><span class="tag">어시스트</span><span class="tag">허슬</span></div></div><div class="pc st"><div class="pn">June Mar Fajardo</div><div class="pt">SM Beermen (PBA)</div><div class="ps">PBA 다회 MVP | 내곽 상징</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">내곽</span><span class="tag">리바운드</span><span class="tag">베테랑</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Dwight Ramos</div><div class="pt">PBA</div><div class="ps">13.5점 | 2차 득점원</div><div class="ptags"><span class="tag">스코어러</span><span class="tag">윙</span><span class="tag">돌파</span></div></div><div class="pc st"><div class="pn">AJ Edu</div><div class="pt">해외리그</div><div class="ps">리바운드 8.0 | 내곽 수비</div><div class="ptags"><span class="tag">센터</span><span class="tag">리바운드</span><span class="tag">수비</span><span class="tag">블록</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">RJ Abarrientos</div><div class="pt">PBA</div><div class="ps">차세대 가드 | 외곽슛</div><div class="ptags"><span class="tag">차세대</span><span class="tag">가드</span><span class="tag">3점슈터</span></div></div><div class="pc sb"><div class="pn">Kevin Quiambao</div><div class="pt">해외리그/PBA</div><div class="ps">다재다능 포워드 | 해외파</div><div class="ptags"><span class="tag">포워드</span><span class="tag">해외경험</span><span class="tag">다재다능</span></div></div><div class="pc sb"><div class="pn">Carl Tamayo</div><div class="pt">PBA</div><div class="ps">에너지 포워드 | 차세대</div><div class="ptags"><span class="tag">젊은피</span><span class="tag">포워드</span><span class="tag">에너지</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="A" id="card-guam">
+    <div class="chdr" onclick="tog(&#39;guam&#39;)">
+      <div class="ctitle"><span class="cflag">🇬🇺</span><div><div class="cname">괌 (Guam)</div><div class="cmeta">FIBA 77위 · 0승4패 → 4위 · W3 2경기 잔여</div></div></div>
+      <div class="cright"><span class="badge b-final">최종 확정</span><span class="badge b-a">A조</span><i class="ti ti-chevron-down chev" id="chev-guam"></i></div>
+    </div>
+    <div class="cbody" id="body-guam">
+      <div class="ccomment"><strong>FIBA 세계 77위. W1·W2 전패 0승4패. 수학적 가능성은 있으나 현실적으로 어렵다.</strong> BJ Freeman이 유일한 안정적 득점원. 로스터 대부분 괌 로컬·세미프로 수준. W3 호주전(홈)·뉴질랜드전(원정) 모두 전력차 크다. 젊은 선수들의 경험 축적이 주목표.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">BJ Freeman</div><div class="pt">대학/해외</div><div class="ps">팀 유일 안정적 득점원</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">가드</span><span class="tag">볼핸들러</span></div></div><div class="pc st"><div class="pn">Zander Kamai</div><div class="pt">괌 로컬</div><div class="ps">팀 리더십 포워드</div><div class="ptags"><span class="tag">포워드</span><span class="tag">리더십</span><span class="tag">올라운더</span></div></div><div class="pc st"><div class="pn">Jonathan Galloway</div><div class="pt">해외리그</div><div class="ps">빅맨 | 내곽 리바운드</div><div class="ptags"><span class="tag">센터</span><span class="tag">내곽</span><span class="tag">리바운드</span></div></div><div class="pc st"><div class="pn">Isaiah Africano</div><div class="pt">해외리그</div><div class="ps">슈팅가드</div><div class="ptags"><span class="tag">슈터</span><span class="tag">윙</span></div></div><div class="pc st"><div class="pn">Mark Johnson</div><div class="pt">해외리그</div><div class="ps">포인트가드</div><div class="ptags"><span class="tag">가드</span><span class="tag">볼핸들링</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Michael Sakazaki</div><div class="pt">괌 로컬</div><div class="ps">가드 뎁스</div><div class="ptags"><span class="tag">가드</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Earnest Ross</div><div class="pt">해외리그</div><div class="ps">식스맨 스코어러</div><div class="ptags"><span class="tag">식스맨</span><span class="tag">득점</span></div></div><div class="pc sb"><div class="pn">Blaise Ada</div><div class="pt">괌 로컬</div><div class="ps">빅맨 뎁스</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="B" id="card-jpn">
+    <div class="chdr" onclick="tog(&#39;jpn&#39;)">
+      <div class="ctitle"><span class="cflag">🇯🇵</span><div><div class="cname">일본 (Japan)</div><div class="cmeta">FIBA 22위 · 3승1패 → 1위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-b">B조</span><i class="ti ti-chevron-down chev" id="chev-jpn"></i></div>
+    </div>
+    <div class="cbody" id="body-jpn">
+      <div class="ccomment"><strong>FIBA 세계 22위. B조 1위. 아시아 랭킹 최상위.</strong> Josh Hawkinson(귀화 C, B리그 9년 베테랑)은 17점 8리바에 어시스트 8개 기록한 만능 빅맨. Yuta Watanabe(전 NBA)는 W2 4블록 포함 수비·블록 전담 올라운더. Keisei Tominaga(G리그)는 극단적 3점 특화 슈터("일본의 커리"). Takumi Saito 볼핸들링 핵심 가드. Yudai Baba 수비형 가드. W3 중국 원정(선양)·한국 원정(고양)이 핵심 고비.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Josh Hawkinson</div><div class="pt">Sun Rockers Shibuya (B리그)</div><div class="ps">17점 8리바 | 귀화 C | 베테랑 | W1 어시 8</div><div class="ptags"><span class="tag">귀화</span><span class="tag">센터</span><span class="tag">리바운드</span><span class="tag">내곽지배</span><span class="tag">베테랑</span><span class="tag">플레이메이킹</span></div></div><div class="pc st"><div class="pn">Takumi Saito</div><div class="pt">B리그</div><div class="ps">올스타급 가드 | 볼핸들링 핵심</div><div class="ptags"><span class="tag">가드</span><span class="tag">볼핸들러</span><span class="tag">어시스트</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Keisei Tominaga</div><div class="pt">Indiana Mad Ants (G리그)</div><div class="ps">극단적 3점 특화 | 퀵릴리스 | "일본의 커리"</div><div class="ptags"><span class="tag">3점슈터</span><span class="tag">클러치</span><span class="tag">퀵릴리스</span><span class="tag">차세대</span></div></div><div class="pc st"><div class="pn">Yuta Watanabe</div><div class="pt">B리그</div><div class="ps">전 NBA | W2 4블록 | 수비형 올라운더</div><div class="ptags"><span class="tag">전NBA</span><span class="tag">블록</span><span class="tag">수비</span><span class="tag">올라운더</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Yudai Baba</div><div class="pt">B리그</div><div class="ps">수비형 가드 | 스틸 강점</div><div class="ptags"><span class="tag">수비</span><span class="tag">스틸</span><span class="tag">퍼리미터수비</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Makoto Hiejima</div><div class="pt">B리그</div><div class="ps">3점슛 베테랑 식스맨 | 국가대표 경력 多</div><div class="ptags"><span class="tag">3점슈터</span><span class="tag">식스맨</span><span class="tag">클러치</span><span class="tag">국가대표다수</span></div></div><div class="pc sb"><div class="pn">Hirotaka Yoshii</div><div class="pt">B리그</div><div class="ps">내곽 뎁스 포워드</div><div class="ptags"><span class="tag">포워드</span><span class="tag">내곽</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Akira Jacobs</div><div class="pt">B리그</div><div class="ps">귀화 포워드 뎁스</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">에너지</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="B" id="card-kor">
+    <div class="chdr" onclick="tog(&#39;kor&#39;)">
+      <div class="ctitle"><span class="cflag">🇰🇷</span><div><div class="cname">대한민국 (Korea)</div><div class="cmeta">FIBA 56위 · 2승2패 → 2위 · W3 2라운드 진출 분수령</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-b">B조</span><i class="ti ti-chevron-down chev" id="chev-kor"></i></div>
+    </div>
+    <div class="cbody" id="body-kor">
+      <div class="ccomment"><strong>FIBA 세계 56위. 7/3 대만전(홈)·7/6 일본전(홈)이 2라운드 진출을 결정짓는 운명의 두 경기.</strong> 이현중(Hyunjung Lee, 나가사키)은 B리그 3점슛 1위(47.9%, 187개)·PO MVP로 커리어 최전성기. 변준형(Byeon Junhyeong) 볼핸들링 가드로 공격 주도. 최준용(Junyong Choi, KCC 우승멤버) 200cm 올라운더 포워드. 이승현(Seounghyun Lee) 베테랑 빅맨. 여준석(Junseok Yeo, 시애틀대) 장신 포워드 높이 담당. 에디 다니엘(Daniel Edi, SK) 고졸 루키 W2 임팩트. 이정현(Junghyun Lee) 창의적 3점 가드.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">이현중 (Hyunjung Lee)</div><div class="pt">나가사키 벨카 (B리그)</div><div class="ps">17.4점 3점슛 47.9%(1위) | B리그 PO MVP</div><div class="ptags"><span class="tag">에이스</span><span class="tag">3점슈터</span><span class="tag">외곽강점</span><span class="tag">B리그우승</span><span class="tag">차세대간판</span></div></div><div class="pc st"><div class="pn">여준석 (Junseok Yeo)</div><div class="pt">Seattle University (미국)</div><div class="ps">장신 포워드 | 높이 담당</div><div class="ptags"><span class="tag">장신포워드</span><span class="tag">높이</span><span class="tag">미래자원</span><span class="tag">차세대</span></div></div><div class="pc st"><div class="pn">최준용 (Junyong Choi)</div><div class="pt">부산 KCC (KBL 챔피언)</div><div class="ps">200cm 올라운더 | KCC 우승멤버</div><div class="ptags"><span class="tag">올라운더</span><span class="tag">멀티포지션수비</span><span class="tag">포워드</span><span class="tag">KCC우승</span></div></div><div class="pc st"><div class="pn">이승현 (Seounghyun Lee)</div><div class="pt">울산 현대모비스 (KBL)</div><div class="ps">베테랑 빅맨 | 국가대표 경력 多</div><div class="ptags"><span class="tag">센터</span><span class="tag">베테랑</span><span class="tag">국가대표다수</span><span class="tag">리바운드</span></div></div><div class="pc st"><div class="pn">변준형 (Byeon Junhyeong)</div><div class="pt">안양 정관장 (KBL)</div><div class="ps">볼핸들링 가드 | 공격 주도</div><div class="ptags"><span class="tag">가드</span><span class="tag">볼핸들러</span><span class="tag">3점</span><span class="tag">공격주도</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">장재석 (Jaeseok Jang)</div><div class="pt">부산 KCC (KBL)</div><div class="ps">KCC 우승 PF | 리바운드·수비</div><div class="ptags"><span class="tag">PF</span><span class="tag">수비</span><span class="tag">리바운드</span><span class="tag">KCC우승</span></div></div><div class="pc sb"><div class="pn">이정현 (Junghyun Lee)</div><div class="pt">고양 소노 (KBL)</div><div class="ps">창의적 가드 | 3점슛 | W1 24점 6/7</div><div class="ptags"><span class="tag">가드</span><span class="tag">3점</span><span class="tag">창의적</span><span class="tag">클러치</span></div></div><div class="pc sb"><div class="pn">에디 다니엘 (Daniel Edi)</div><div class="pt">서울 SK (KBL)</div><div class="ps">고졸 루키 | 스피드·에너지 | W2 임팩트</div><div class="ptags"><span class="tag">루키</span><span class="tag">에너지</span><span class="tag">스피드</span><span class="tag">차세대</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="B" id="card-chn">
+    <div class="chdr" onclick="tog(&#39;chn&#39;)">
+      <div class="ctitle"><span class="cflag">🇨🇳</span><div><div class="cname">중국 (China)</div><div class="cmeta">FIBA 26위 · 2승2패 → 3위 · W3 결과에 따라 2라운드 진출 결정</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-b">B조</span><i class="ti ti-chevron-down chev" id="chev-chn"></i></div>
+    </div>
+    <div class="cbody" id="body-chn">
+      <div class="ccomment"><strong>FIBA 세계 26위. W2 대역전 2연승으로 부활. 한국과 득실 동률(0).</strong> Hu Jinqiu(CBA챔피언, 19.4점 8.3리바) 중국 내곽 절대 핵심. Zhao Jiwei(CBA 역대 어시스트 2위 베테랑 PG) 팀 운영 중심. Zeng Fanbo(14.7점 라이징스타 SF) 블록·림어택 차세대 간판. Wang Junjie 아시아컵 올스타5 선정 차세대 가드. W3 일본전(홈, 선양)·중화 타이베이전(중립, 고양)이 2라운드 열쇠.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Hu Jinqiu</div><div class="pt">Zhejiang Lions (CBA 챔피언)</div><div class="ps">19.4점 8.3리바 | CBA 챔피언 에이스 C</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">빅맨</span><span class="tag">포스트업</span><span class="tag">리바운드</span><span class="tag">CBA챔피언</span></div></div><div class="pc st"><div class="pn">Zhao Jiwei</div><div class="pt">Liaoning Flying Leopards (CBA)</div><div class="ps">CBA 역대 어시스트 2위 | 베테랑 PG</div><div class="ptags"><span class="tag">포인트가드</span><span class="tag">어시스트강점</span><span class="tag">경기운영</span><span class="tag">베테랑</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Zeng Fanbo</div><div class="pt">Beijing Ducks (CBA)</div><div class="ps">14.7점 | 라이징스타 SF | 블록·림어택</div><div class="ptags"><span class="tag">포워드</span><span class="tag">라이징스타</span><span class="tag">블록</span><span class="tag">차세대간판</span></div></div><div class="pc st"><div class="pn">Liao Sanning</div><div class="pt">CBA</div><div class="ps">가드 | 어시스트·스틸</div><div class="ptags"><span class="tag">가드</span><span class="tag">어시스트</span><span class="tag">수비</span><span class="tag">스틸</span></div></div><div class="pc st"><div class="pn">Yang Hansen</div><div class="pt">Qingdao Eagles (CBA)</div><div class="ps">216cm 장신 C | 림프로텍션</div><div class="ptags"><span class="tag">장신센터</span><span class="tag">블록</span><span class="tag">림프로텍션</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Ben Li</div><div class="pt">NBA/CBA 귀화</div><div class="ps">귀화 포워드 | NBA 경험 | 3점</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">NBA경험</span><span class="tag">3점</span></div></div><div class="pc sb"><div class="pn">Wang Junjie</div><div class="pt">CBA</div><div class="ps">차세대 가드 | 아시아컵 올스타5</div><div class="ptags"><span class="tag">차세대</span><span class="tag">가드</span><span class="tag">올스타</span></div></div><div class="pc sb"><div class="pn">Gao Shiyan</div><div class="pt">CBA</div><div class="ps">수비 스페셜리스트 | 스틸</div><div class="ptags"><span class="tag">수비</span><span class="tag">스틸</span><span class="tag">퍼리미터수비</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="B" id="card-tpe">
+    <div class="chdr" onclick="tog(&#39;tpe&#39;)">
+      <div class="ctitle"><span class="cflag">🇹🇼</span><div><div class="cname">중화 타이베이 (Chinese Taipei)</div><div class="cmeta">FIBA 68위 · 1승3패 → 4위 · W3 2경기 잔여 · 수학적 2라운드 가능</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-b">B조</span><i class="ti ti-chevron-down chev" id="chev-tpe"></i></div>
+    </div>
+    <div class="cbody" id="body-tpe">
+      <div class="ccomment"><strong>FIBA 세계 68위. W2에서 한국을 꺾는 이변 후 자신감 급상승.</strong> 귀화 Brandon Gilbeck(센터)·Bachir Gadiaga(가드) 투톱에 절대 의존 구조. Kuan-Chuan Chen 베테랑 가드 경기 운영. W3 한국전(고양 원정)·중국전(고양 중립) 2승 시 한국·중국과 동률 가능 → 한국 최대 복병.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Brandon Gilbeck</div><div class="pt">P.LEAGUE+</div><div class="ps">귀화 C | 내곽 지배·리바운드</div><div class="ptags"><span class="tag">귀화</span><span class="tag">센터</span><span class="tag">내곽지배</span><span class="tag">리바운드</span></div></div><div class="pc st"><div class="pn">Bachir Gadiaga</div><div class="pt">P.LEAGUE+</div><div class="ps">귀화 가드 | 돌파·득점 주도</div><div class="ptags"><span class="tag">귀화</span><span class="tag">주 득점원</span><span class="tag">돌파</span><span class="tag">볼핸들러</span></div></div><div class="pc st"><div class="pn">Kuan-Chuan Chen</div><div class="pt">P.LEAGUE+</div><div class="ps">베테랑 가드 | 경기운영</div><div class="ptags"><span class="tag">경험</span><span class="tag">경기운영</span><span class="tag">베테랑</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Jonah Morrison</div><div class="pt">P.LEAGUE+</div><div class="ps">귀화 포워드 | 에너지·허슬</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">에너지</span><span class="tag">허슬</span></div></div><div class="pc st"><div class="pn">Josh Chou</div><div class="pt">P.LEAGUE+</div><div class="ps">퍼리미터 3점슛 | 윙수비</div><div class="ptags"><span class="tag">3점슈터</span><span class="tag">윙수비</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Hsin Hao Sung</div><div class="pt">P.LEAGUE+</div><div class="ps">가드 식스맨</div><div class="ptags"><span class="tag">가드</span><span class="tag">식스맨</span><span class="tag">수비</span></div></div><div class="pc sb"><div class="pn">Benson Lin</div><div class="pt">P.LEAGUE+</div><div class="ps">에너지 포워드 | 이현중 라이벌</div><div class="ptags"><span class="tag">포워드</span><span class="tag">에너지</span><span class="tag">수비</span></div></div><div class="pc sb"><div class="pn">Ying-Chun Chen</div><div class="pt">P.LEAGUE+</div><div class="ps">가드 뎁스</div><div class="ptags"><span class="tag">가드</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="C" id="card-jor">
+    <div class="chdr" onclick="tog(&#39;jor&#39;)">
+      <div class="ctitle"><span class="cflag">🇯🇴</span><div><div class="cname">요르단 (Jordan)</div><div class="cmeta">FIBA 41위 · 3승0패 → 1위 · 2라운드 확정 · C조 전승</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-c">C조</span><i class="ti ti-chevron-down chev" id="chev-jor"></i></div>
+    </div>
+    <div class="cbody" id="body-jor">
+      <div class="ccomment"><strong>FIBA 세계 41위. C조 전승 1위. 득실차 +80 압도적.</strong> Jalen Harris(귀화)는 W1 시리아 상대 42점(3점슛 8개, 효율 +40)을 터트린 이 대회 최고 스코어러. 퀵릴리스·돌파·3점·자유투 유도 모든 공격 도구 보유. Ahmed Alhamarsheh는 W1 100번째 FIBA 출전 기록 베테랑 SF. Abdullah Olajuwon(하킴 아들, 귀화) 내곽 존재감. W3 이란전(홈 암만)이 최대 고비.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Jalen Harris</div><div class="pt">요르단 귀화</div><div class="ps">W1 42점 +40효율 | 3점슛 8개 | 이 대회 최고 스코어러</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">3점슈터</span><span class="tag">돌파</span><span class="tag">클러치</span><span class="tag">퀵릴리스</span></div></div><div class="pc st"><div class="pn">Ahmad Alhamarsheh</div><div class="pt">요르단 리그</div><div class="ps">W1 100번째 FIBA 출전 | 베테랑 SF</div><div class="ptags"><span class="tag">베테랑</span><span class="tag">SF</span><span class="tag">리더십</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Abdullah Olajuwon</div><div class="pt">요르단/해외</div><div class="ps">귀화 빅맨 | 내곽 존재감</div><div class="ptags"><span class="tag">귀화</span><span class="tag">센터</span><span class="tag">내곽</span></div></div><div class="pc st"><div class="pn">Fadi Ibrahim</div><div class="pt">요르단 리그</div><div class="ps">가드 | 플레이메이킹</div><div class="ptags"><span class="tag">가드</span><span class="tag">플레이메이킹</span><span class="tag">경기운영</span></div></div><div class="pc st"><div class="pn">Omar Salman</div><div class="pt">요르단 리그</div><div class="ps">스코어러 가드 | 외곽슛</div><div class="ptags"><span class="tag">득점</span><span class="tag">가드</span><span class="tag">3점</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Malek Kanaan</div><div class="pt">요르단 리그</div><div class="ps">에너지 포워드 식스맨</div><div class="ptags"><span class="tag">포워드</span><span class="tag">에너지</span><span class="tag">식스맨</span></div></div><div class="pc sb"><div class="pn">Hashem Abbas</div><div class="pt">요르단 리그</div><div class="ps">빅맨 뎁스</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Amin Abu Hawwas</div><div class="pt">요르단 리그</div><div class="ps">가드 식스맨</div><div class="ptags"><span class="tag">가드</span><span class="tag">식스맨</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="C" id="card-iri">
+    <div class="chdr" onclick="tog(&#39;iri&#39;)">
+      <div class="ctitle"><span class="cflag">🇮🇷</span><div><div class="cname">이란 (Iran)</div><div class="cmeta">FIBA 28위 · 2승1패 → 2위 · 2라운드 확정 ※홈경기 중립구장</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-c">C조</span><i class="ti ti-chevron-down chev" id="chev-iri"></i></div>
+    </div>
+    <div class="cbody" id="body-iri">
+      <div class="ccomment"><strong>FIBA 세계 28위. 이란-이스라엘 전쟁으로 홈경기 중립구장 진행.</strong> Behnam Yakhchali(17.5점 4.0어시, 아시아컵 올스타5)는 창의적 드리블·돌파·3점 겸비한 팀 에이스. Arsalan Kazemi(전 NBA 드래프트 54픽, 리바운드 8.2 스틸 3.0)는 수비허슬 강점 베테랑 SF. Hasan Aliakbari 장신 수비 C(블록 1.5). Piter Girgoorian(귀화, W1 21점 맹활약)·Seyed Mahdi Jafari(W1 어시스트 9개) 식스맨 층도 두텁다.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Behnam Yakhchali</div><div class="pt">이란 리그</div><div class="ps">17.5점 4.0어시 | 아시아컵 올스타5</div><div class="ptags"><span class="tag">주 득점원</span><span class="tag">가드</span><span class="tag">창의적드리블</span><span class="tag">3점</span><span class="tag">차세대간판</span></div></div><div class="pc st"><div class="pn">Arsalan Kazemi</div><div class="pt">Shahrdari Gorgan (이란)</div><div class="ps">전 NBA 드래프트 | 리바운드 8.2 스틸 3.0</div><div class="ptags"><span class="tag">리바운더</span><span class="tag">수비허슬</span><span class="tag">스틸</span><span class="tag">전NBA드래프트</span><span class="tag">베테랑</span></div></div><div class="pc st"><div class="pn">Mohammad Amini</div><div class="pt">이란 리그</div><div class="ps">15.8점 6.2리바 | 올라운더 F</div><div class="ptags"><span class="tag">올라운더</span><span class="tag">득점</span><span class="tag">리바운드</span></div></div><div class="pc st"><div class="pn">Hasan Aliakbari</div><div class="pt">이란 리그</div><div class="ps">블록 1.5 | 장신 수비 C</div><div class="ptags"><span class="tag">센터</span><span class="tag">블록</span><span class="tag">림프로텍션</span><span class="tag">수비</span></div></div><div class="pc st"><div class="pn">Matin Aghajanpour</div><div class="pt">이란 리그</div><div class="ps">16.8점 | 2차 스코어러 포워드</div><div class="ptags"><span class="tag">스코어러</span><span class="tag">포워드</span><span class="tag">득점</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Piter Girgoorian</div><div class="pt">이란/해외</div><div class="ps">귀화 포워드 | W1 21점 맹활약</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">스코어러</span><span class="tag">차세대</span></div></div><div class="pc sb"><div class="pn">Seyed Mahdi Jafari</div><div class="pt">이란 리그</div><div class="ps">W1 어시스트 9개 | 젊은 PG</div><div class="ptags"><span class="tag">가드</span><span class="tag">어시스트</span><span class="tag">젊은피</span><span class="tag">차세대</span></div></div><div class="pc sb"><div class="pn">Navid Rezaeifar</div><div class="pt">이란 리그</div><div class="ps">가드 뎁스 | 수비</div><div class="ptags"><span class="tag">가드</span><span class="tag">수비</span><span class="tag">식스맨</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="C" id="card-syr">
+    <div class="chdr" onclick="tog(&#39;syr&#39;)">
+      <div class="ctitle"><span class="cflag">🇸🇾</span><div><div class="cname">시리아 (Syria)</div><div class="cmeta">FIBA 74위 · 1승2패 → 3위 · W3 3경기 잔여 ※홈경기 중립구장</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-c">C조</span><i class="ti ti-chevron-down chev" id="chev-syr"></i></div>
+    </div>
+    <div class="cbody" id="body-syr">
+      <div class="ccomment"><strong>FIBA 세계 74위. 내전·분쟁으로 홈경기 중립구장. W3에서 이란·이라크·요르단 3경기 진행.</strong> 귀화 Javion Coleman Blake(가드)·Donte McGill(포워드)·David Hermes(빅맨)·Andree Michelsson(포워드)이 전력 핵심. C조 전승 요르단에게 100-48 대패했으나 이라크는 꺾으며 3위 유지 중. W3 이라크전 승리는 필수.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Javion Coleman Blake</div><div class="pt">시리아 귀화</div><div class="ps">귀화 가드 | 팀 스코어러 주도</div><div class="ptags"><span class="tag">귀화</span><span class="tag">가드</span><span class="tag">주 득점원</span><span class="tag">볼핸들러</span></div></div><div class="pc st"><div class="pn">Donte Mc Gill</div><div class="pt">시리아 귀화</div><div class="ps">귀화 포워드 | 에너지·허슬</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">에너지</span><span class="tag">허슬</span></div></div><div class="pc st"><div class="pn">David Hermes</div><div class="pt">시리아 귀화</div><div class="ps">귀화 빅맨 | 내곽 수비</div><div class="ptags"><span class="tag">귀화</span><span class="tag">빅맨</span><span class="tag">내곽</span><span class="tag">수비</span></div></div><div class="pc st"><div class="pn">Andree Michelsson</div><div class="pt">시리아 귀화</div><div class="ps">귀화 포워드 | 외곽 가담</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">3점</span></div></div><div class="pc st"><div class="pn">Omar Alfarouk Makanas</div><div class="pt">시리아 리그</div><div class="ps">로컬 에이스 가드 | 팀 리더십</div><div class="ptags"><span class="tag">로컬에이스</span><span class="tag">가드</span><span class="tag">리더십</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Ahmad Habash</div><div class="pt">시리아 리그</div><div class="ps">식스맨 가드</div><div class="ptags"><span class="tag">가드</span><span class="tag">식스맨</span><span class="tag">수비</span></div></div><div class="pc sb"><div class="pn">George Nounou</div><div class="pt">시리아 리그</div><div class="ps">빅맨 뎁스</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Georgi Nazarian</div><div class="pt">시리아 리그</div><div class="ps">포워드 뎁스</div><div class="ptags"><span class="tag">포워드</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="C" id="card-irq">
+    <div class="chdr" onclick="tog(&#39;irq&#39;)">
+      <div class="ctitle"><span class="cflag">🇮🇶</span><div><div class="cname">이라크 (Iraq)</div><div class="cmeta">FIBA 84위 · 0승3패 → 4위 · W3 3경기 잔여 ※홈경기 중립구장</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-c">C조</span><i class="ti ti-chevron-down chev" id="chev-irq"></i></div>
+    </div>
+    <div class="cbody" id="body-irq">
+      <div class="ccomment"><strong>FIBA 세계 84위. W1·W2 전패. W3에서 요르단·이란·시리아 3경기 진행.</strong> W1 이란 상대 전반 19-18로 앞서가는 투지를 보였으나 결국 패. Ali Muayad Ismael 팀 에이스. Ihab Al-Zuhairi 베테랑 센터. 수학적 2라운드 가능성은 있으나 현실적으로 매우 어렵다.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Ali Muayad Ismael</div><div class="pt">이라크 리그</div><div class="ps">팀 에이스 포워드</div><div class="ptags"><span class="tag">포워드</span><span class="tag">에이스</span><span class="tag">득점</span></div></div><div class="pc st"><div class="pn">Thulfiqar Hammoodi</div><div class="pt">이라크/해외</div><div class="ps">가드 | 볼핸들링</div><div class="ptags"><span class="tag">가드</span><span class="tag">볼핸들링</span><span class="tag">경기운영</span></div></div><div class="pc st"><div class="pn">Murad Zewki</div><div class="pt">이라크 리그</div><div class="ps">스코어러 가드</div><div class="ptags"><span class="tag">득점</span><span class="tag">가드</span><span class="tag">슈터</span></div></div><div class="pc st"><div class="pn">Nawres Dhafer</div><div class="pt">이라크 리그</div><div class="ps">빅맨 C | 내곽 수비</div><div class="ptags"><span class="tag">센터</span><span class="tag">내곽</span><span class="tag">리바운드</span></div></div><div class="pc st"><div class="pn">Mohammed Amin</div><div class="pt">이라크/해외</div><div class="ps">윙 포워드 | 수비</div><div class="ptags"><span class="tag">포워드</span><span class="tag">윙</span><span class="tag">수비</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Ihab Al-Zuhairi</div><div class="pt">이라크 리그</div><div class="ps">베테랑 C | 내곽 분전</div><div class="ptags"><span class="tag">베테랑</span><span class="tag">센터</span><span class="tag">내곽</span></div></div><div class="pc sb"><div class="pn">Zinar Selman Alyousif</div><div class="pt">이라크 리그</div><div class="ps">가드 뎁스</div><div class="ptags"><span class="tag">가드</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Monjed Haider Ktaiman</div><div class="pt">이라크 리그</div><div class="ps">포워드 뎁스</div><div class="ptags"><span class="tag">포워드</span><span class="tag">에너지</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="D" id="card-lbn">
+    <div class="chdr" onclick="tog(&#39;lbn&#39;)">
+      <div class="ctitle"><span class="cflag">🇱🇧</span><div><div class="cname">레바논 (Lebanon)</div><div class="cmeta">FIBA 33위 · 2승1패 → 1위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-d">D조</span><i class="ti ti-chevron-down chev" id="chev-lbn"></i></div>
+    </div>
+    <div class="cbody" id="body-lbn">
+      <div class="ccomment"><strong>FIBA 세계 33위. D조 1위. 서아시아 다크호스.</strong> 주장 Wael Arakji(19.3점 5.0어시, Al Riyadi)는 돌파·외곽·패스를 아우르는 레바논 농구 아이콘. 귀화 Dedric Lawson(전 캔자스대 All-American, 14.3점 12.0리바) 내곽 압도적 PF. Omari Spellman(전 NBA 워리어스) 스트레치 PF. Hayk Gyokchyan 블록 4.0 림프로텍터. 젊은 Jihad Elkhatib(21세, W2 12점 활약) 차세대 간판.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Wael Arakji</div><div class="pt">Al Riyadi (레바논 리그)</div><div class="ps">19.3점 5.0어시 | 주장·아이콘</div><div class="ptags"><span class="tag">주장</span><span class="tag">주 득점원</span><span class="tag">플레이메이커</span><span class="tag">돌파</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Dedric Lawson</div><div class="pt">레바논 귀화</div><div class="ps">14.3점 12.0리바 | 귀화 PF | 전 캔자스 All-American</div><div class="ptags"><span class="tag">귀화</span><span class="tag">리바운드왕</span><span class="tag">내곽지배</span><span class="tag">포스트업</span></div></div><div class="pc st"><div class="pn">Sergio El Darwich</div><div class="pt">레바논/해외</div><div class="ps">10.5점 6.0어시 1.5스틸 | 수비형 가드</div><div class="ptags"><span class="tag">수비</span><span class="tag">어시스트강점</span><span class="tag">스틸</span><span class="tag">가드</span></div></div><div class="pc st"><div class="pn">Hayk Gyokchyan</div><div class="pt">레바논 리그</div><div class="ps">블록 4.0 | D조 최고 림프로텍터</div><div class="ptags"><span class="tag">블록</span><span class="tag">림프로텍션</span><span class="tag">리바운드</span><span class="tag">수비</span></div></div><div class="pc st"><div class="pn">Omari Spellman</div><div class="pt">레바논 귀화</div><div class="ps">전 NBA(워리어스) | 스트레치 PF | 3점</div><div class="ptags"><span class="tag">귀화</span><span class="tag">전NBA</span><span class="tag">3점슈터</span><span class="tag">스트레치PF</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Jihad Elkhatib</div><div class="pt">레바논 리그</div><div class="ps">21세 차세대 간판 | W2 12점 5리바</div><div class="ptags"><span class="tag">차세대간판</span><span class="tag">포워드</span><span class="tag">에너지</span><span class="tag">차세대</span></div></div><div class="pc sb"><div class="pn">Youssef Khayat</div><div class="pt">레바논 리그</div><div class="ps">리바운드 7.3 | 빅맨 식스맨</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">리바운드</span><span class="tag">식스맨</span></div></div><div class="pc sb"><div class="pn">Ali Mansour</div><div class="pt">레바논 리그</div><div class="ps">아시아컵 15어시 | 패스 특화 가드</div><div class="ptags"><span class="tag">어시스트강점</span><span class="tag">패스</span><span class="tag">가드</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="D" id="card-qat">
+    <div class="chdr" onclick="tog(&#39;qat&#39;)">
+      <div class="ctitle"><span class="cflag">🇶🇦</span><div><div class="cname">카타르 (Qatar)</div><div class="cmeta">FIBA 78위 · 2승1패 → 2위 · 2라운드 자동 진출(개최국)</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-d">D조</span><i class="ti ti-chevron-down chev" id="chev-qat"></i></div>
+    </div>
+    <div class="cbody" id="body-qat">
+      <div class="ccomment"><strong>FIBA 세계 78위. 2027 월드컵 개최국 자동 진출 보장.</strong> Brandon Goodwin(전 NBA 호크스, 귀화)은 폭발적 돌파·퀵릴리스 3점으로 W1 레바논 원정 이변 주역. Alen Hadzibegovic(W1 리바운드 12개) 내곽 장악. 귀화 선수들이 대부분의 공격 담당. W3 사우디전(홈)·인도전(홈) 2경기 진행.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Brandon Goodwin</div><div class="pt">카타르 귀화</div><div class="ps">전 NBA(호크스) | 돌파·퀵릴리스 3점</div><div class="ptags"><span class="tag">귀화</span><span class="tag">전NBA</span><span class="tag">주 득점원</span><span class="tag">돌파</span><span class="tag">퀵릴리스3점</span></div></div><div class="pc st"><div class="pn">Alen Hadzibegovic</div><div class="pt">카타르 리그</div><div class="ps">귀화 C | W1 리바운드 12개</div><div class="ptags"><span class="tag">귀화</span><span class="tag">센터</span><span class="tag">리바운드</span><span class="tag">내곽</span></div></div><div class="pc st"><div class="pn">Babacar Dieng</div><div class="pt">카타르 리그</div><div class="ps">귀화 빅맨 | 내곽 득점·리바</div><div class="ptags"><span class="tag">귀화</span><span class="tag">빅맨</span><span class="tag">내곽</span><span class="tag">득점</span></div></div><div class="pc st"><div class="pn">Mike Lewis II</div><div class="pt">카타르 리그</div><div class="ps">귀화 가드 | 외곽슛 위협</div><div class="ptags"><span class="tag">귀화</span><span class="tag">가드</span><span class="tag">3점슈터</span></div></div><div class="pc st"><div class="pn">Ghassan Hajar</div><div class="pt">카타르 로컬</div><div class="ps">로컬 에이스 | 팀 리더십</div><div class="ptags"><span class="tag">로컬에이스</span><span class="tag">리더십</span><span class="tag">가드</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Donte Grantham</div><div class="pt">카타르 리그</div><div class="ps">귀화 포워드 | 스트레치 3점</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">3점</span><span class="tag">스트레치</span></div></div><div class="pc sb"><div class="pn">Tyler Harris</div><div class="pt">카타르 리그</div><div class="ps">귀화 슈팅가드 | 외곽</div><div class="ptags"><span class="tag">귀화</span><span class="tag">슈터</span></div></div><div class="pc sb"><div class="pn">Bobo Magassa</div><div class="pt">카타르 리그</div><div class="ps">귀화 포워드 뎁스</div><div class="ptags"><span class="tag">귀화</span><span class="tag">포워드</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="D" id="card-ksa">
+    <div class="chdr" onclick="tog(&#39;ksa&#39;)">
+      <div class="ctitle"><span class="cflag">🇸🇦</span><div><div class="cname">사우디아라비아 (Saudi Arabia)</div><div class="cmeta">FIBA 66위 · 2승1패 → 3위 · 2라운드 확정</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-d">D조</span><i class="ti ti-chevron-down chev" id="chev-ksa"></i></div>
+    </div>
+    <div class="cbody" id="body-ksa">
+      <div class="ccomment"><strong>FIBA 세계 66위. 아시아컵 2025 득점·리바운드 리딩 듀오 활약.</strong> Muhammad-Ali Abdur-Rahkman(귀화, 아시아컵 득점 1위)은 NBA 경험 기반 돌파·3점·자유투 유도 에이스. Mohammed Alsuwailem(아시아컵 리바운드 1위, W1 블록 4개) 내곽 지배자. W3 카타르전(원정)·레바논전(홈) 2경기. 레바논전 설욕이 핵심.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Muhammad-Ali Abdur-Rahkman</div><div class="pt">사우디 귀화</div><div class="ps">아시아컵 득점 1위 | NBA 경험 귀화 가드</div><div class="ptags"><span class="tag">귀화</span><span class="tag">주 득점원</span><span class="tag">NBA경험</span><span class="tag">3점</span><span class="tag">돌파</span></div></div><div class="pc st"><div class="pn">Mohammed Alsuwailem</div><div class="pt">사우디 리그</div><div class="ps">아시아컵 리바운드 1위 | W1 블록 4개</div><div class="ptags"><span class="tag">센터</span><span class="tag">리바운드</span><span class="tag">블록</span><span class="tag">림프로텍션</span></div></div><div class="pc st"><div class="pn">Osama Albargawi</div><div class="pt">사우디 리그</div><div class="ps">장신 포워드 | 내곽·외곽 병행</div><div class="ptags"><span class="tag">포워드</span><span class="tag">장신</span><span class="tag">득점</span></div></div><div class="pc st"><div class="pn">Musab Kadi</div><div class="pt">사우디 리그</div><div class="ps">빅맨 | 내곽 수비</div><div class="ptags"><span class="tag">빅맨</span><span class="tag">내곽</span><span class="tag">수비</span></div></div><div class="pc st"><div class="pn">Manaf Alsalem</div><div class="pt">사우디 리그</div><div class="ps">다재다능 포워드</div><div class="ptags"><span class="tag">포워드</span><span class="tag">다재다능</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Ali Shubayli</div><div class="pt">사우디 리그</div><div class="ps">식스맨 가드 | 에너지</div><div class="ptags"><span class="tag">가드</span><span class="tag">식스맨</span><span class="tag">에너지</span></div></div><div class="pc sb"><div class="pn">Marzouq Almuwallad</div><div class="pt">사우디 리그</div><div class="ps">포워드 뎁스</div><div class="ptags"><span class="tag">포워드</span><span class="tag">뎁스</span></div></div><div class="pc sb"><div class="pn">Khalid Abdel Gabar</div><div class="pt">사우디 리그</div><div class="ps">가드 뎁스</div><div class="ptags"><span class="tag">가드</span><span class="tag">뎁스</span></div></div></div>
+      </div>
+    </div>
+  </div><div class="card" data-group="D" id="card-ind">
+    <div class="chdr" onclick="tog(&#39;ind&#39;)">
+      <div class="ctitle"><span class="cflag">🇮🇳</span><div><div class="cname">인도 (India)</div><div class="cmeta">FIBA 76위 · 0승3패 → 4위 · W3 3경기 잔여</div></div></div>
+      <div class="cright"><span class="badge b-prelim">예비 명단</span><span class="badge b-d">D조</span><i class="ti ti-chevron-down chev" id="chev-ind"></i></div>
+    </div>
+    <div class="cbody" id="body-ind">
+      <div class="ccomment"><strong>FIBA 세계 76위. W1·W2 전패. W3에서 사우디·카타르·레바논 3경기 진행.</strong> Princepal Singh(NBA G리그 경험) 최고 유망주이나 팀 전체 수준은 상위권과 격차 크다. Kanwar Sandhu(W1 19점, 3점슛 강점)가 그나마 위협적. 팀 필드골 29% 슈팅 수준이 최대 문제. 수학적으로는 가능하나 현실적으로 3경기 모두 매우 어렵다.</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid"><div class="pc st"><div class="pn">Princepal Singh</div><div class="pt">NBA G리그/인도</div><div class="ps">인도 최고 유망주 | NBA G리그 경험</div><div class="ptags"><span class="tag">포워드</span><span class="tag">유망주</span><span class="tag">장신</span><span class="tag">차세대간판</span></div></div><div class="pc st"><div class="pn">Kanwar Sandhu</div><div class="pt">인도 리그</div><div class="ps">W1 19점 홀로 분전 | 3점슛 강점</div><div class="ptags"><span class="tag">슈터</span><span class="tag">3점슈터</span><span class="tag">가드</span></div></div><div class="pc st"><div class="pn">Arvinder Singh</div><div class="pt">인도 리그</div><div class="ps">센터 | 내곽 수비</div><div class="ptags"><span class="tag">센터</span><span class="tag">수비</span><span class="tag">블록</span></div></div><div class="pc st"><div class="pn">Palpreet Singh Brar</div><div class="pt">인도 리그</div><div class="ps">베테랑 포워드 | 국가대표 경력 多</div><div class="ptags"><span class="tag">포워드</span><span class="tag">베테랑</span><span class="tag">국가대표다수</span></div></div><div class="pc st"><div class="pn">Muin Bek Hafeez</div><div class="pt">인도 리그</div><div class="ps">볼핸들링 가드</div><div class="ptags"><span class="tag">가드</span><span class="tag">볼핸들링</span><span class="tag">경기운영</span></div></div></div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid"><div class="pc sb"><div class="pn">Aaron Michael Monteiro</div><div class="pt">인도 리그</div><div class="ps">식스맨 가드</div><div class="ptags"><span class="tag">가드</span><span class="tag">식스맨</span></div></div><div class="pc sb"><div class="pn">Pranav Prince</div><div class="pt">인도 리그</div><div class="ps">슈팅가드 | 윙</div><div class="ptags"><span class="tag">슈터</span><span class="tag">윙</span></div></div><div class="pc sb"><div class="pn">Harsh Dagar</div><div class="pt">인도 리그</div><div class="ps">포워드 뎁스</div><div class="ptags"><span class="tag">포워드</span><span class="tag">에너지</span></div></div></div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="footer">
+    FIBA 공식 로스터 기준 · W2 완료 성적 반영 · 승리 예측은 참고용 · KSL 상품운영실 프로토운영팀
+  </div>
+</div>
+
+<script>
+const T=[
+  {id:'aus',flag:'🇦🇺',name:'호주 (Australia)',status:'final',group:'A',rank:6,
+   rec:'4승0패 → 1위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 6위. 아시아 절대 강자. W3에서 Bryce Cotton 국가대표 데뷔 예정.</strong> Cotton(Adelaide 36ers, 25.9점 7.6어시 NBL 6회 MVP)은 3점슛·퀵릴리스·자유투 유도·플레이메이킹을 모두 갖춘 NBL 역대급 선수. Mitch Creek·Jack McVeigh(All-NBL 2nd Team) 양방향 윙진 균형. Alex Condon 내곽 픽앤롤·리바운드. Elijah Pepper·Taran Armstrong 뎁스 충분. W3 괌전(홈, Cotton 데뷔)·필리핀 원정 모두 우세.',
+   starters:[
+     {n:'Bryce Cotton',t:'Adelaide 36ers (NBL)',s:'25.9점 7.6어시 | NBL 6회 MVP | W3 국대 데뷔',g:['주 득점원','3점슈터','플레이메이커','클러치','NBL아이콘']},
+     {n:'Mitch Creek',t:'SE Melbourne Phoenix (NBL)',s:'베테랑 SF | 양방향 플레이',g:['올라운더','수비','리더십','국가대표다수']},
+     {n:'Jack McVeigh',t:'Cairns Taipans (NBL)',s:'All-NBL 2nd Team | 외곽 위협',g:['3점슈터','윙수비','차세대핵심']},
+     {n:'Tyrese Proctor',t:'Duke → 프로 준비',s:'폭발적 돌파 가드 | 차세대',g:['돌파','속공','창의적드리블','차세대']},
+     {n:'Alex Condon',t:'Brisbane Bullets (NBL)',s:'내곽 빅맨 | 픽앤롤·리바',g:['센터','픽앤롤','리바운드','수비']},
+   ],
+   sixth:[
+     {n:'Ben Henshall',t:'Perth Wildcats (NBL)',s:'인사이드아웃 PF 식스맨',g:['PF','픽앤롤','에너지']},
+     {n:'Elijah Pepper',t:'Wellington Saints (NZ NBL)',s:'득점력 있는 식스맨',g:['스코어러','윙']},
+     {n:'Angus Glover',t:'NBL',s:'뎁스 가드',g:['가드','뎁스']},
+   ]},
+  {id:'nzl',flag:'🇳🇿',name:'뉴질랜드 (New Zealand)',status:'final',group:'A',rank:24,
+   rec:'2승2패 → 2위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 24위. W3에서 Tai Webster·Shea Ili 복귀로 전력 최고조.</strong> Webster(NZ NBL 24.3점)는 장기 부상 복귀 에이스 가드(전 NBA). Shea Ili는 NBL 2회 수비왕으로 퍼리미터 수비 최고 수준. Tohi Smith-Milner(18.0점)가 공격 주도. Sam Timmins(리바운드 10.3, 블록 1.8) 내곽 장악. Taylor Britt(어시스트 7.3) 플레이메이킹. W3 홈 필리핀전·괌 원정 모두 우세.',
+   starters:[
+     {n:'Tai Webster',t:'Manawatū Jets (NZ NBL)',s:'24.3점 | W3 복귀 | 전 NBA',g:['에이스','득점','돌파','리더십','W3복귀']},
+     {n:'Shea Ili',t:'Melbourne United (NBL)',s:'NBL 수비왕 2회 | 8.0어시 | W3 복귀',g:['수비스페셜리스트','퍼리미터수비','어시스트','W3복귀']},
+     {n:'Tohi Smith-Milner',t:'Brisbane Bullets (NBL)',s:'18.0점 | 팀 최다득점 포워드',g:['주 득점원','포워드','돌파','에너지']},
+     {n:'Sam Timmins',t:'Southland Sharks (NZ NBL)',s:'리바운드 10.3 블록 1.8 | 장신 C',g:['센터','리바운드','림프로텍션','수비']},
+     {n:'Reuben Te Rangi',t:'BNZ Breakers / Tauranga Whai',s:'16.5점 | 올라운더 | 국가대표 경력 多',g:['가드','다재다능','득점','국가대표다수']},
+   ],
+   sixth:[
+     {n:'Taylor Britt',t:'Canterbury Rams (NZ NBL)',s:'어시스트 7.3 | W3로 50캡 예정',g:['플레이메이커','어시스트','베테랑']},
+     {n:'Taine Murray',t:'Brisbane Bullets (NBL)',s:'3점 가드 | 차세대 핵심',g:['3점슈터','젊은피','차세대']},
+     {n:'Jordan Ngatai',t:'Tauranga Whai',s:'95캡 베테랑 윙',g:['경험','윙수비','베테랑']},
+   ]},
+  {id:'phi',flag:'🇵🇭',name:'필리핀 (Philippines)',status:'final',group:'A',rank:36,
+   rec:'2승2패 → 3위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 36위. Justin Brownlee 중심의 귀화 의존 구조.</strong> Brownlee(16.5점 4.5어시)가 돌파·드리블·패스를 도맡는 사실상 원맨팀. Scottie Thompson은 수비·허슬로 보조. June Mar Fajardo(PBA 다회 MVP) 내곽 상징이지만 체력 관리 필요. Dwight Ramos 2차 득점원. RJ Abarrientos·Justine Baltazar가 새 활력. W3 뉴질랜드 원정은 어렵고, 홈 호주전도 전력차 크다.',
+   starters:[
+     {n:'Justin Brownlee',t:'Barangay Ginebra (PBA)',s:'16.5점 4.5어시 | 귀화 에이스',g:['귀화','주 득점원','볼핸들러','돌파','창의적드리블']},
+     {n:'Scottie Thompson',t:'Barangay Ginebra (PBA)',s:'올라운더 SG | 수비·허슬',g:['올라운더','수비','어시스트','허슬']},
+     {n:'June Mar Fajardo',t:'SM Beermen (PBA)',s:'PBA 다회 MVP | 내곽 상징',g:['빅맨','내곽','리바운드','베테랑','국가대표다수']},
+     {n:'Dwight Ramos',t:'PBA',s:'13.5점 | 2차 득점원',g:['스코어러','윙','돌파']},
+     {n:'AJ Edu',t:'해외리그',s:'리바운드 8.0 | 내곽 수비',g:['센터','리바운드','수비','블록']},
+   ],
+   sixth:[
+     {n:'RJ Abarrientos',t:'PBA',s:'차세대 가드 | 외곽슛',g:['차세대','가드','3점슈터']},
+     {n:'Kevin Quiambao',t:'해외리그/PBA',s:'다재다능 포워드 | 해외파',g:['포워드','해외경험','다재다능']},
+     {n:'Carl Tamayo',t:'PBA',s:'에너지 포워드 | 차세대',g:['젊은피','포워드','에너지']},
+   ]},
+  {id:'guam',flag:'🇬🇺',name:'괌 (Guam)',status:'final',group:'A',rank:77,
+   rec:'0승4패 → 4위 · W3 2경기 잔여',
+   comment:'<strong>FIBA 세계 77위. W1·W2 전패 0승4패. 수학적 가능성은 있으나 현실적으로 어렵다.</strong> BJ Freeman이 유일한 안정적 득점원. 로스터 대부분 괌 로컬·세미프로 수준. W3 호주전(홈)·뉴질랜드전(원정) 모두 전력차 크다. 젊은 선수들의 경험 축적이 주목표.',
+   starters:[
+     {n:'BJ Freeman',t:'대학/해외',s:'팀 유일 안정적 득점원',g:['주 득점원','가드','볼핸들러']},
+     {n:'Zander Kamai',t:'괌 로컬',s:'팀 리더십 포워드',g:['포워드','리더십','올라운더']},
+     {n:'Jonathan Galloway',t:'해외리그',s:'빅맨 | 내곽 리바운드',g:['센터','내곽','리바운드']},
+     {n:'Isaiah Africano',t:'해외리그',s:'슈팅가드',g:['슈터','윙']},
+     {n:'Mark Johnson',t:'해외리그',s:'포인트가드',g:['가드','볼핸들링']},
+   ],
+   sixth:[
+     {n:'Michael Sakazaki',t:'괌 로컬',s:'가드 뎁스',g:['가드','뎁스']},
+     {n:'Earnest Ross',t:'해외리그',s:'식스맨 스코어러',g:['식스맨','득점']},
+     {n:'Blaise Ada',t:'괌 로컬',s:'빅맨 뎁스',g:['빅맨','뎁스']},
+   ]},
+  {id:'jpn',flag:'🇯🇵',name:'일본 (Japan)',status:'prelim',group:'B',rank:22,
+   rec:'3승1패 → 1위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 22위. B조 1위. 아시아 랭킹 최상위.</strong> Josh Hawkinson(귀화 C, B리그 9년 베테랑)은 17점 8리바에 어시스트 8개 기록한 만능 빅맨. Yuta Watanabe(전 NBA)는 W2 4블록 포함 수비·블록 전담 올라운더. Keisei Tominaga(G리그)는 극단적 3점 특화 슈터("일본의 커리"). Takumi Saito 볼핸들링 핵심 가드. Yudai Baba 수비형 가드. W3 중국 원정(선양)·한국 원정(고양)이 핵심 고비.',
+   starters:[
+     {n:'Josh Hawkinson',t:'Sun Rockers Shibuya (B리그)',s:'17점 8리바 | 귀화 C | 베테랑 | W1 어시 8',g:['귀화','센터','리바운드','내곽지배','베테랑','플레이메이킹']},
+     {n:'Takumi Saito',t:'B리그',s:'올스타급 가드 | 볼핸들링 핵심',g:['가드','볼핸들러','어시스트','국가대표다수']},
+     {n:'Keisei Tominaga',t:'Indiana Mad Ants (G리그)',s:'극단적 3점 특화 | 퀵릴리스 | "일본의 커리"',g:['3점슈터','클러치','퀵릴리스','차세대']},
+     {n:'Yuta Watanabe',t:'B리그',s:'전 NBA | W2 4블록 | 수비형 올라운더',g:['전NBA','블록','수비','올라운더','국가대표다수']},
+     {n:'Yudai Baba',t:'B리그',s:'수비형 가드 | 스틸 강점',g:['수비','스틸','퍼리미터수비']},
+   ],
+   sixth:[
+     {n:'Makoto Hiejima',t:'B리그',s:'3점슛 베테랑 식스맨 | 국가대표 경력 多',g:['3점슈터','식스맨','클러치','국가대표다수']},
+     {n:'Hirotaka Yoshii',t:'B리그',s:'내곽 뎁스 포워드',g:['포워드','내곽','뎁스']},
+     {n:'Akira Jacobs',t:'B리그',s:'귀화 포워드 뎁스',g:['귀화','포워드','에너지']},
+   ]},
+  {id:'kor',flag:'🇰🇷',name:'대한민국 (Korea)',status:'prelim',group:'B',rank:56,
+   rec:'2승2패 → 2위 · W3 2라운드 진출 분수령',
+   comment:'<strong>FIBA 세계 56위. 7/3 대만전(홈)·7/6 일본전(홈)이 2라운드 진출을 결정짓는 운명의 두 경기.</strong> 이현중(Hyunjung Lee, 나가사키)은 B리그 3점슛 1위(47.9%, 187개)·PO MVP로 커리어 최전성기. 변준형(Byeon Junhyeong) 볼핸들링 가드로 공격 주도. 최준용(Junyong Choi, KCC 우승멤버) 200cm 올라운더 포워드. 이승현(Seounghyun Lee) 베테랑 빅맨. 여준석(Junseok Yeo, 시애틀대) 장신 포워드 높이 담당. 에디 다니엘(Daniel Edi, SK) 고졸 루키 W2 임팩트. 이정현(Junghyun Lee) 창의적 3점 가드.',
+   starters:[
+     {n:'이현중 (Hyunjung Lee)',t:'나가사키 벨카 (B리그)',s:'17.4점 3점슛 47.9%(1위) | B리그 PO MVP',g:['에이스','3점슈터','외곽강점','B리그우승','차세대간판']},
+     {n:'여준석 (Junseok Yeo)',t:'Seattle University (미국)',s:'장신 포워드 | 높이 담당',g:['장신포워드','높이','미래자원','차세대']},
+     {n:'최준용 (Junyong Choi)',t:'부산 KCC (KBL 챔피언)',s:'200cm 올라운더 | KCC 우승멤버',g:['올라운더','멀티포지션수비','포워드','KCC우승']},
+     {n:'이승현 (Seounghyun Lee)',t:'울산 현대모비스 (KBL)',s:'베테랑 빅맨 | 국가대표 경력 多',g:['센터','베테랑','국가대표다수','리바운드']},
+     {n:'변준형 (Byeon Junhyeong)',t:'안양 정관장 (KBL)',s:'볼핸들링 가드 | 공격 주도',g:['가드','볼핸들러','3점','공격주도']},
+   ],
+   sixth:[
+     {n:'장재석 (Jaeseok Jang)',t:'부산 KCC (KBL)',s:'KCC 우승 PF | 리바운드·수비',g:['PF','수비','리바운드','KCC우승']},
+     {n:'이정현 (Junghyun Lee)',t:'고양 소노 (KBL)',s:'창의적 가드 | 3점슛 | W1 24점 6/7',g:['가드','3점','창의적','클러치']},
+     {n:'에디 다니엘 (Daniel Edi)',t:'서울 SK (KBL)',s:'고졸 루키 | 스피드·에너지 | W2 임팩트',g:['루키','에너지','스피드','차세대']},
+   ]},
+  {id:'chn',flag:'🇨🇳',name:'중국 (China)',status:'prelim',group:'B',rank:26,
+   rec:'2승2패 → 3위 · W3 결과에 따라 2라운드 진출 결정',
+   comment:'<strong>FIBA 세계 26위. W2 대역전 2연승으로 부활. 한국과 득실 동률(0).</strong> Hu Jinqiu(CBA챔피언, 19.4점 8.3리바) 중국 내곽 절대 핵심. Zhao Jiwei(CBA 역대 어시스트 2위 베테랑 PG) 팀 운영 중심. Zeng Fanbo(14.7점 라이징스타 SF) 블록·림어택 차세대 간판. Wang Junjie 아시아컵 올스타5 선정 차세대 가드. W3 일본전(홈, 선양)·중화 타이베이전(중립, 고양)이 2라운드 열쇠.',
+   starters:[
+     {n:'Hu Jinqiu',t:'Zhejiang Lions (CBA 챔피언)',s:'19.4점 8.3리바 | CBA 챔피언 에이스 C',g:['주 득점원','빅맨','포스트업','리바운드','CBA챔피언']},
+     {n:'Zhao Jiwei',t:'Liaoning Flying Leopards (CBA)',s:'CBA 역대 어시스트 2위 | 베테랑 PG',g:['포인트가드','어시스트강점','경기운영','베테랑','국가대표다수']},
+     {n:'Zeng Fanbo',t:'Beijing Ducks (CBA)',s:'14.7점 | 라이징스타 SF | 블록·림어택',g:['포워드','라이징스타','블록','차세대간판']},
+     {n:'Liao Sanning',t:'CBA',s:'가드 | 어시스트·스틸',g:['가드','어시스트','수비','스틸']},
+     {n:'Yang Hansen',t:'Qingdao Eagles (CBA)',s:'216cm 장신 C | 림프로텍션',g:['장신센터','블록','림프로텍션']},
+   ],
+   sixth:[
+     {n:'Ben Li',t:'NBA/CBA 귀화',s:'귀화 포워드 | NBA 경험 | 3점',g:['귀화','포워드','NBA경험','3점']},
+     {n:'Wang Junjie',t:'CBA',s:'차세대 가드 | 아시아컵 올스타5',g:['차세대','가드','올스타']},
+     {n:'Gao Shiyan',t:'CBA',s:'수비 스페셜리스트 | 스틸',g:['수비','스틸','퍼리미터수비']},
+   ]},
+  {id:'tpe',flag:'🇹🇼',name:'중화 타이베이 (Chinese Taipei)',status:'prelim',group:'B',rank:68,
+   rec:'1승3패 → 4위 · W3 2경기 잔여 · 수학적 2라운드 가능',
+   comment:'<strong>FIBA 세계 68위. W2에서 한국을 꺾는 이변 후 자신감 급상승.</strong> 귀화 Brandon Gilbeck(센터)·Bachir Gadiaga(가드) 투톱에 절대 의존 구조. Kuan-Chuan Chen 베테랑 가드 경기 운영. W3 한국전(고양 원정)·중국전(고양 중립) 2승 시 한국·중국과 동률 가능 → 한국 최대 복병.',
+   starters:[
+     {n:'Brandon Gilbeck',t:'P.LEAGUE+',s:'귀화 C | 내곽 지배·리바운드',g:['귀화','센터','내곽지배','리바운드']},
+     {n:'Bachir Gadiaga',t:'P.LEAGUE+',s:'귀화 가드 | 돌파·득점 주도',g:['귀화','주 득점원','돌파','볼핸들러']},
+     {n:'Kuan-Chuan Chen',t:'P.LEAGUE+',s:'베테랑 가드 | 경기운영',g:['경험','경기운영','베테랑','국가대표다수']},
+     {n:'Jonah Morrison',t:'P.LEAGUE+',s:'귀화 포워드 | 에너지·허슬',g:['귀화','포워드','에너지','허슬']},
+     {n:'Josh Chou',t:'P.LEAGUE+',s:'퍼리미터 3점슛 | 윙수비',g:['3점슈터','윙수비']},
+   ],
+   sixth:[
+     {n:'Hsin Hao Sung',t:'P.LEAGUE+',s:'가드 식스맨',g:['가드','식스맨','수비']},
+     {n:'Benson Lin',t:'P.LEAGUE+',s:'에너지 포워드 | 이현중 라이벌',g:['포워드','에너지','수비']},
+     {n:'Ying-Chun Chen',t:'P.LEAGUE+',s:'가드 뎁스',g:['가드','뎁스']},
+   ]},
+  {id:'jor',flag:'🇯🇴',name:'요르단 (Jordan)',status:'prelim',group:'C',rank:41,
+   rec:'3승0패 → 1위 · 2라운드 확정 · C조 전승',
+   comment:'<strong>FIBA 세계 41위. C조 전승 1위. 득실차 +80 압도적.</strong> Jalen Harris(귀화)는 W1 시리아 상대 42점(3점슛 8개, 효율 +40)을 터트린 이 대회 최고 스코어러. 퀵릴리스·돌파·3점·자유투 유도 모든 공격 도구 보유. Ahmed Alhamarsheh는 W1 100번째 FIBA 출전 기록 베테랑 SF. Abdullah Olajuwon(하킴 아들, 귀화) 내곽 존재감. W3 이란전(홈 암만)이 최대 고비.',
+   starters:[
+     {n:'Jalen Harris',t:'요르단 귀화',s:'W1 42점 +40효율 | 3점슛 8개 | 이 대회 최고 스코어러',g:['주 득점원','3점슈터','돌파','클러치','퀵릴리스']},
+     {n:'Ahmad Alhamarsheh',t:'요르단 리그',s:'W1 100번째 FIBA 출전 | 베테랑 SF',g:['베테랑','SF','리더십','국가대표다수']},
+     {n:'Abdullah Olajuwon',t:'요르단/해외',s:'귀화 빅맨 | 내곽 존재감',g:['귀화','센터','내곽']},
+     {n:'Fadi Ibrahim',t:'요르단 리그',s:'가드 | 플레이메이킹',g:['가드','플레이메이킹','경기운영']},
+     {n:'Omar Salman',t:'요르단 리그',s:'스코어러 가드 | 외곽슛',g:['득점','가드','3점']},
+   ],
+   sixth:[
+     {n:'Malek Kanaan',t:'요르단 리그',s:'에너지 포워드 식스맨',g:['포워드','에너지','식스맨']},
+     {n:'Hashem Abbas',t:'요르단 리그',s:'빅맨 뎁스',g:['빅맨','뎁스']},
+     {n:'Amin Abu Hawwas',t:'요르단 리그',s:'가드 식스맨',g:['가드','식스맨']},
+   ]},
+  {id:'iri',flag:'🇮🇷',name:'이란 (Iran)',status:'prelim',group:'C',rank:28,
+   rec:'2승1패 → 2위 · 2라운드 확정 ※홈경기 중립구장',
+   comment:'<strong>FIBA 세계 28위. 이란-이스라엘 전쟁으로 홈경기 중립구장 진행.</strong> Behnam Yakhchali(17.5점 4.0어시, 아시아컵 올스타5)는 창의적 드리블·돌파·3점 겸비한 팀 에이스. Arsalan Kazemi(전 NBA 드래프트 54픽, 리바운드 8.2 스틸 3.0)는 수비허슬 강점 베테랑 SF. Hasan Aliakbari 장신 수비 C(블록 1.5). Piter Girgoorian(귀화, W1 21점 맹활약)·Seyed Mahdi Jafari(W1 어시스트 9개) 식스맨 층도 두텁다.',
+   starters:[
+     {n:'Behnam Yakhchali',t:'이란 리그',s:'17.5점 4.0어시 | 아시아컵 올스타5',g:['주 득점원','가드','창의적드리블','3점','차세대간판']},
+     {n:'Arsalan Kazemi',t:'Shahrdari Gorgan (이란)',s:'전 NBA 드래프트 | 리바운드 8.2 스틸 3.0',g:['리바운더','수비허슬','스틸','전NBA드래프트','베테랑']},
+     {n:'Mohammad Amini',t:'이란 리그',s:'15.8점 6.2리바 | 올라운더 F',g:['올라운더','득점','리바운드']},
+     {n:'Hasan Aliakbari',t:'이란 리그',s:'블록 1.5 | 장신 수비 C',g:['센터','블록','림프로텍션','수비']},
+     {n:'Matin Aghajanpour',t:'이란 리그',s:'16.8점 | 2차 스코어러 포워드',g:['스코어러','포워드','득점']},
+   ],
+   sixth:[
+     {n:'Piter Girgoorian',t:'이란/해외',s:'귀화 포워드 | W1 21점 맹활약',g:['귀화','포워드','스코어러','차세대']},
+     {n:'Seyed Mahdi Jafari',t:'이란 리그',s:'W1 어시스트 9개 | 젊은 PG',g:['가드','어시스트','젊은피','차세대']},
+     {n:'Navid Rezaeifar',t:'이란 리그',s:'가드 뎁스 | 수비',g:['가드','수비','식스맨']},
+   ]},
+  {id:'syr',flag:'🇸🇾',name:'시리아 (Syria)',status:'prelim',group:'C',rank:74,
+   rec:'1승2패 → 3위 · W3 3경기 잔여 ※홈경기 중립구장',
+   comment:'<strong>FIBA 세계 74위. 내전·분쟁으로 홈경기 중립구장. W3에서 이란·이라크·요르단 3경기 진행.</strong> 귀화 Javion Coleman Blake(가드)·Donte McGill(포워드)·David Hermes(빅맨)·Andree Michelsson(포워드)이 전력 핵심. C조 전승 요르단에게 100-48 대패했으나 이라크는 꺾으며 3위 유지 중. W3 이라크전 승리는 필수.',
+   starters:[
+     {n:'Javion Coleman Blake',t:'시리아 귀화',s:'귀화 가드 | 팀 스코어러 주도',g:['귀화','가드','주 득점원','볼핸들러']},
+     {n:'Donte Mc Gill',t:'시리아 귀화',s:'귀화 포워드 | 에너지·허슬',g:['귀화','포워드','에너지','허슬']},
+     {n:'David Hermes',t:'시리아 귀화',s:'귀화 빅맨 | 내곽 수비',g:['귀화','빅맨','내곽','수비']},
+     {n:'Andree Michelsson',t:'시리아 귀화',s:'귀화 포워드 | 외곽 가담',g:['귀화','포워드','3점']},
+     {n:'Omar Alfarouk Makanas',t:'시리아 리그',s:'로컬 에이스 가드 | 팀 리더십',g:['로컬에이스','가드','리더십']},
+   ],
+   sixth:[
+     {n:'Ahmad Habash',t:'시리아 리그',s:'식스맨 가드',g:['가드','식스맨','수비']},
+     {n:'George Nounou',t:'시리아 리그',s:'빅맨 뎁스',g:['빅맨','뎁스']},
+     {n:'Georgi Nazarian',t:'시리아 리그',s:'포워드 뎁스',g:['포워드','뎁스']},
+   ]},
+  {id:'irq',flag:'🇮🇶',name:'이라크 (Iraq)',status:'prelim',group:'C',rank:84,
+   rec:'0승3패 → 4위 · W3 3경기 잔여 ※홈경기 중립구장',
+   comment:'<strong>FIBA 세계 84위. W1·W2 전패. W3에서 요르단·이란·시리아 3경기 진행.</strong> W1 이란 상대 전반 19-18로 앞서가는 투지를 보였으나 결국 패. Ali Muayad Ismael 팀 에이스. Ihab Al-Zuhairi 베테랑 센터. 수학적 2라운드 가능성은 있으나 현실적으로 매우 어렵다.',
+   starters:[
+     {n:'Ali Muayad Ismael',t:'이라크 리그',s:'팀 에이스 포워드',g:['포워드','에이스','득점']},
+     {n:'Thulfiqar Hammoodi',t:'이라크/해외',s:'가드 | 볼핸들링',g:['가드','볼핸들링','경기운영']},
+     {n:'Murad Zewki',t:'이라크 리그',s:'스코어러 가드',g:['득점','가드','슈터']},
+     {n:'Nawres Dhafer',t:'이라크 리그',s:'빅맨 C | 내곽 수비',g:['센터','내곽','리바운드']},
+     {n:'Mohammed Amin',t:'이라크/해외',s:'윙 포워드 | 수비',g:['포워드','윙','수비']},
+   ],
+   sixth:[
+     {n:'Ihab Al-Zuhairi',t:'이라크 리그',s:'베테랑 C | 내곽 분전',g:['베테랑','센터','내곽']},
+     {n:'Zinar Selman Alyousif',t:'이라크 리그',s:'가드 뎁스',g:['가드','뎁스']},
+     {n:'Monjed Haider Ktaiman',t:'이라크 리그',s:'포워드 뎁스',g:['포워드','에너지']},
+   ]},
+  {id:'lbn',flag:'🇱🇧',name:'레바논 (Lebanon)',status:'prelim',group:'D',rank:33,
+   rec:'2승1패 → 1위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 33위. D조 1위. 서아시아 다크호스.</strong> 주장 Wael Arakji(19.3점 5.0어시, Al Riyadi)는 돌파·외곽·패스를 아우르는 레바논 농구 아이콘. 귀화 Dedric Lawson(전 캔자스대 All-American, 14.3점 12.0리바) 내곽 압도적 PF. Omari Spellman(전 NBA 워리어스) 스트레치 PF. Hayk Gyokchyan 블록 4.0 림프로텍터. 젊은 Jihad Elkhatib(21세, W2 12점 활약) 차세대 간판.',
+   starters:[
+     {n:'Wael Arakji',t:'Al Riyadi (레바논 리그)',s:'19.3점 5.0어시 | 주장·아이콘',g:['주장','주 득점원','플레이메이커','돌파','국가대표다수']},
+     {n:'Dedric Lawson',t:'레바논 귀화',s:'14.3점 12.0리바 | 귀화 PF | 전 캔자스 All-American',g:['귀화','리바운드왕','내곽지배','포스트업']},
+     {n:'Sergio El Darwich',t:'레바논/해외',s:'10.5점 6.0어시 1.5스틸 | 수비형 가드',g:['수비','어시스트강점','스틸','가드']},
+     {n:'Hayk Gyokchyan',t:'레바논 리그',s:'블록 4.0 | D조 최고 림프로텍터',g:['블록','림프로텍션','리바운드','수비']},
+     {n:'Omari Spellman',t:'레바논 귀화',s:'전 NBA(워리어스) | 스트레치 PF | 3점',g:['귀화','전NBA','3점슈터','스트레치PF']},
+   ],
+   sixth:[
+     {n:'Jihad Elkhatib',t:'레바논 리그',s:'21세 차세대 간판 | W2 12점 5리바',g:['차세대간판','포워드','에너지','차세대']},
+     {n:'Youssef Khayat',t:'레바논 리그',s:'리바운드 7.3 | 빅맨 식스맨',g:['빅맨','리바운드','식스맨']},
+     {n:'Ali Mansour',t:'레바논 리그',s:'아시아컵 15어시 | 패스 특화 가드',g:['어시스트강점','패스','가드']},
+   ]},
+  {id:'qat',flag:'🇶🇦',name:'카타르 (Qatar)',status:'prelim',group:'D',rank:78,
+   rec:'2승1패 → 2위 · 2라운드 자동 진출(개최국)',
+   comment:'<strong>FIBA 세계 78위. 2027 월드컵 개최국 자동 진출 보장.</strong> Brandon Goodwin(전 NBA 호크스, 귀화)은 폭발적 돌파·퀵릴리스 3점으로 W1 레바논 원정 이변 주역. Alen Hadzibegovic(W1 리바운드 12개) 내곽 장악. 귀화 선수들이 대부분의 공격 담당. W3 사우디전(홈)·인도전(홈) 2경기 진행.',
+   starters:[
+     {n:'Brandon Goodwin',t:'카타르 귀화',s:'전 NBA(호크스) | 돌파·퀵릴리스 3점',g:['귀화','전NBA','주 득점원','돌파','퀵릴리스3점']},
+     {n:'Alen Hadzibegovic',t:'카타르 리그',s:'귀화 C | W1 리바운드 12개',g:['귀화','센터','리바운드','내곽']},
+     {n:'Babacar Dieng',t:'카타르 리그',s:'귀화 빅맨 | 내곽 득점·리바',g:['귀화','빅맨','내곽','득점']},
+     {n:'Mike Lewis II',t:'카타르 리그',s:'귀화 가드 | 외곽슛 위협',g:['귀화','가드','3점슈터']},
+     {n:'Ghassan Hajar',t:'카타르 로컬',s:'로컬 에이스 | 팀 리더십',g:['로컬에이스','리더십','가드']},
+   ],
+   sixth:[
+     {n:'Donte Grantham',t:'카타르 리그',s:'귀화 포워드 | 스트레치 3점',g:['귀화','포워드','3점','스트레치']},
+     {n:'Tyler Harris',t:'카타르 리그',s:'귀화 슈팅가드 | 외곽',g:['귀화','슈터']},
+     {n:'Bobo Magassa',t:'카타르 리그',s:'귀화 포워드 뎁스',g:['귀화','포워드','뎁스']},
+   ]},
+  {id:'ksa',flag:'🇸🇦',name:'사우디아라비아 (Saudi Arabia)',status:'prelim',group:'D',rank:66,
+   rec:'2승1패 → 3위 · 2라운드 확정',
+   comment:'<strong>FIBA 세계 66위. 아시아컵 2025 득점·리바운드 리딩 듀오 활약.</strong> Muhammad-Ali Abdur-Rahkman(귀화, 아시아컵 득점 1위)은 NBA 경험 기반 돌파·3점·자유투 유도 에이스. Mohammed Alsuwailem(아시아컵 리바운드 1위, W1 블록 4개) 내곽 지배자. W3 카타르전(원정)·레바논전(홈) 2경기. 레바논전 설욕이 핵심.',
+   starters:[
+     {n:'Muhammad-Ali Abdur-Rahkman',t:'사우디 귀화',s:'아시아컵 득점 1위 | NBA 경험 귀화 가드',g:['귀화','주 득점원','NBA경험','3점','돌파']},
+     {n:'Mohammed Alsuwailem',t:'사우디 리그',s:'아시아컵 리바운드 1위 | W1 블록 4개',g:['센터','리바운드','블록','림프로텍션']},
+     {n:'Osama Albargawi',t:'사우디 리그',s:'장신 포워드 | 내곽·외곽 병행',g:['포워드','장신','득점']},
+     {n:'Musab Kadi',t:'사우디 리그',s:'빅맨 | 내곽 수비',g:['빅맨','내곽','수비']},
+     {n:'Manaf Alsalem',t:'사우디 리그',s:'다재다능 포워드',g:['포워드','다재다능']},
+   ],
+   sixth:[
+     {n:'Ali Shubayli',t:'사우디 리그',s:'식스맨 가드 | 에너지',g:['가드','식스맨','에너지']},
+     {n:'Marzouq Almuwallad',t:'사우디 리그',s:'포워드 뎁스',g:['포워드','뎁스']},
+     {n:'Khalid Abdel Gabar',t:'사우디 리그',s:'가드 뎁스',g:['가드','뎁스']},
+   ]},
+  {id:'ind',flag:'🇮🇳',name:'인도 (India)',status:'prelim',group:'D',rank:76,
+   rec:'0승3패 → 4위 · W3 3경기 잔여',
+   comment:'<strong>FIBA 세계 76위. W1·W2 전패. W3에서 사우디·카타르·레바논 3경기 진행.</strong> Princepal Singh(NBA G리그 경험) 최고 유망주이나 팀 전체 수준은 상위권과 격차 크다. Kanwar Sandhu(W1 19점, 3점슛 강점)가 그나마 위협적. 팀 필드골 29% 슈팅 수준이 최대 문제. 수학적으로는 가능하나 현실적으로 3경기 모두 매우 어렵다.',
+   starters:[
+     {n:'Princepal Singh',t:'NBA G리그/인도',s:'인도 최고 유망주 | NBA G리그 경험',g:['포워드','유망주','장신','차세대간판']},
+     {n:'Kanwar Sandhu',t:'인도 리그',s:'W1 19점 홀로 분전 | 3점슛 강점',g:['슈터','3점슈터','가드']},
+     {n:'Arvinder Singh',t:'인도 리그',s:'센터 | 내곽 수비',g:['센터','수비','블록']},
+     {n:'Palpreet Singh Brar',t:'인도 리그',s:'베테랑 포워드 | 국가대표 경력 多',g:['포워드','베테랑','국가대표다수']},
+     {n:'Muin Bek Hafeez',t:'인도 리그',s:'볼핸들링 가드',g:['가드','볼핸들링','경기운영']},
+   ],
+   sixth:[
+     {n:'Aaron Michael Monteiro',t:'인도 리그',s:'식스맨 가드',g:['가드','식스맨']},
+     {n:'Pranav Prince',t:'인도 리그',s:'슈팅가드 | 윙',g:['슈터','윙']},
+     {n:'Harsh Dagar',t:'인도 리그',s:'포워드 뎁스',g:['포워드','에너지']},
+   ]},
+];
+
+const grpBadge={A:'b-a',B:'b-b',C:'b-c',D:'b-d'};
+function filt(type,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display=type==='all'?'':(c.dataset.group===type?'':'none');
+  });
+}
+function tog(id){
+  document.getElementById('body-'+id).classList.toggle('open');
+  document.getElementById('chev-'+id).classList.toggle('open');
+}
+function mkCard(t){
+  const pp=t.starters.map(p=>`<div class="pc st"><div class="pn">${p.n}</div><div class="pt">${p.t}</div><div class="ps">${p.s}</div><div class="ptags">${p.g.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>`).join('');
+  const sp=t.sixth.map(p=>`<div class="pc sb"><div class="pn">${p.n}</div><div class="pt">${p.t}</div><div class="ps">${p.s}</div><div class="ptags">${p.g.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>`).join('');
+  const sb=t.status==='final'?'<span class="badge b-final">최종 확정</span>':'<span class="badge b-prelim">예비 명단</span>';
+  return `<div class="card" data-group="${t.group}" id="card-${t.id}">
+    <div class="chdr" onclick="tog('${t.id}')">
+      <div class="ctitle"><span class="cflag">${t.flag}</span><div><div class="cname">${t.name}</div><div class="cmeta">FIBA ${t.rank}위 · ${t.rec}</div></div></div>
+      <div class="cright">${sb}<span class="badge ${grpBadge[t.group]}">${t.group}조</span><i class="ti ti-chevron-down chev" id="chev-${t.id}"></i></div>
+    </div>
+    <div class="cbody" id="body-${t.id}">
+      <div class="ccomment">${t.comment}</div>
+      <div class="cplayers">
+        <div class="slabel">⬛ 예상 주전 5인</div><div class="pgrid">${pp}</div>
+        <div class="divider"></div>
+        <div class="slabel">🟩 핵심 식스맨 3인</div><div class="pgrid">${sp}</div>
+      </div>
+    </div>
+  </div>`;
+}
+document.getElementById('grid').innerHTML=T.map(mkCard).join('');
+</script>
+
+
+</body></html>
